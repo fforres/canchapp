@@ -1,0 +1,19 @@
+<section data-ng-controller="TipoFieldsController" data-ng-init="find()">
+    <div class="page-header">
+        <h1>Tipo fields</h1>
+    </div>
+    <div class="list-group">
+        <a data-ng-repeat="tipoField in tipoFields" data-ng-href="#!/tipo-fields/{{tipoField._id}}" class="list-group-item">
+			<small class="list-group-item-text">
+				Posted on
+				<span data-ng-bind="tipoField.created | date:'medium'"></span>
+				by
+				<span data-ng-bind="tipoField.user.displayName"></span>
+			</small>
+			<h4 class="list-group-item-heading" data-ng-bind="tipoField.name"></h4>
+        </a>
+    </div>
+    <div class="alert alert-warning text-center" data-ng-hide="!tipoFields.$resolved || tipoFields.length">
+    	No Tipo fields yet, why don't you <a href="/#!/tipo-fields/create">create one</a>?
+    </div>
+</section>
