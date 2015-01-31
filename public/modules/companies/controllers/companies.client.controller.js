@@ -21,27 +21,27 @@ angular.module('companies').controller('CompaniesController', ['$scope', '$state
                 iscafeteria: this.iscafeteria,
                 isnecesariosersocio: this.isnecesariosersocio
             });
-            /*
+            
             company.$save(function(response) {
                 // Redirect after save
                 $location.path('companies/' + response._id);
 
                 // Clear form fields
-                $scope.name = ''
-                $scope.address = ''
-                $scope.email = ''
-                $scope.phone = ''
-                $scope.geolox_x = ''
-                $scope.geolox_y = ''
-                $scope.comuna = ''
-                $scope.city = ''
-                $scope.country = ''
-                $scope.iscafeteria, = false
-                $scope.isnecesariosersocio = false
+                $scope.name = '';
+                $scope.address = '';
+                $scope.email = '';
+                $scope.phone = '';
+                $scope.geolox_x = '';
+                $scope.geolox_y = '';
+                $scope.comuna = '';
+                $scope.city = '';
+                $scope.country = '';
+                $scope.iscafeteria = false;
+                $scope.isnecesariosersocio = false;
             }, function(errorResponse) {
                 $scope.error = errorResponse.data.message;
             });
-            */
+            
         };
         // Remove existing Company
         $scope.remove = function(company) {

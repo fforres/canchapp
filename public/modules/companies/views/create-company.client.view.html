@@ -19,6 +19,14 @@
                             <input type="text" data-ng-model="address" id="address" class="form-control" placeholder="Address" required>
                         </div>
                     </div>
+
+                    <div>
+                        <label class="control-label" for="phone">Phone</label>
+                        <div class="controls">
+                            <input type="text" data-ng-model="phone" id="phone" class="form-control" placeholder="Phone" required>
+                        </div>
+                    </div>
+
                     <div>
                         <label class="control-label" for="email">Contact Email</label>
                         <div class="controls">
@@ -50,9 +58,21 @@
                     </div>
 
                     <div ng-show="showmap" class='getLocationMap'>
-                        <label class="control-label" for="ciudad">Ciudad</label>
-
+                        <label class="control-label" for="ciudad">GeoLocalizacion</label>
+                        <div class="text-danger">
+                            <strong> Arrastra el pin para ajustar la localizacion del local </strong>
+                        </div>
                         <div id="mapCanvas"> </div>
+                    </div>
+
+                    <div>
+                        <input type="checkbox" ng-model="iscafeteria">
+                        <label class="control-label" for="ciudad">Tiene cafetería </label>
+                    </div>
+
+                    <div>
+                        <input type="checkbox" ng-model="isnecesariosersocio">
+                        <label class="control-label" for="ciudad">Necesario ser socio </label>
                     </div>
 
                 </div>
