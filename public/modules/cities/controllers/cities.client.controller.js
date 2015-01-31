@@ -10,7 +10,7 @@ angular.module('cities').controller('CitiesController', ['$scope', '$stateParams
 			// Create new City object
 			var city = new Cities ({
 				name: this.name,
-				pais: this.country
+				country: this.country
 			}); 
 			// Redirect after save
 			city.$save(function(response) {
@@ -18,7 +18,7 @@ angular.module('cities').controller('CitiesController', ['$scope', '$stateParams
 
 				// Clear form fields
 				$scope.name = '';
-				$scope.pais = '';
+				$scope.country = '';
 			}, function(errorResponse) {
 				$scope.error = errorResponse.data.message;
 			});

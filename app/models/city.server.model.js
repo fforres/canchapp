@@ -20,10 +20,10 @@ var CitySchema = new Schema({
 		type: Date,
 		default: Date.now
 	},
-	pais: {
+	country: {
 		type: Schema.ObjectId,
 		default: null,
-		required: 'Please select a pais',
+		required: 'Please select a country',
 		trim: true
 	},
 	user: {

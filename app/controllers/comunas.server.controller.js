@@ -84,6 +84,24 @@ exports.list = function(req, res) {
 	});
 };
 
+
+/**
+ * List of Comunas by cities
+ */
+exports.listByCity = function(req, res) { 
+	Comuna.find({city:req.params.cityId}).sort('-created').populate('user', 'displayName').exec(function(err, comunas) {
+		if (err) {
+			return res.status(400).send({
+				message: errorHandler.getErrorMessage(err)
+			});
+		} else {
+			res.jsonp(comunas);
+		}
+	});
+};
+
+
+
 /**
  * Comuna middleware
  */

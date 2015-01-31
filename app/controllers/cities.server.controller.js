@@ -89,7 +89,7 @@ exports.list = function(req, res) {
  */
 exports.listByCountries = function(req, res) { 
     console.log(req.params)
-	City.find({pais:req.params.countryId}).sort('-created').populate('user', 'displayName').exec(function(err, cities) {
+	City.find({country:req.params.countryId}).sort('-created').populate('user', 'displayName').exec(function(err, cities) {
 		if (err) {
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)

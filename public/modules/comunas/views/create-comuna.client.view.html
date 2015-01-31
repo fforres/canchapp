@@ -6,12 +6,12 @@
         <form class="form-horizontal" data-ng-submit="create()" novalidate>
             <fieldset>
                 <div class="form-group">
-                    
-                    
+
+
                     <countries-select></countries-select>
-                    
+
                     <cities-select></cities-select>
-                    
+
                     <div ng-show="city">
                         <label class="control-label" for="name">Name</label>
                         <div class="controls">
@@ -22,9 +22,9 @@
                 <div class="form-group">
                     <input type="submit" class="btn btn-default">
                 </div>
-				<div data-ng-show="error" class="text-danger">
-					<strong data-ng-bind="error"></strong>
-				</div>
+                <div data-ng-show="error" class="text-danger">
+                    <strong data-ng-bind="error"></strong>
+                </div>
             </fieldset>
         </form>
     </div>

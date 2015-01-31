@@ -3,7 +3,7 @@
 angular.module('comunas').directive('citiesSelect', [
 	function() {
 		return {
-			template:   '<div ng-show="cities.length>0"><label class="control-label" for="pais">Ciudad</label>'+
+			template:   '<div ng-show="cities.length>0"><label class="control-label" for="ciudad">Ciudad</label>'+
                         '<div class="controls">'+
                             '<select class="form-control"'+
                                     'data-ng-model="city"'+

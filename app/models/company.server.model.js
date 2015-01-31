@@ -50,16 +50,16 @@ var CompanySchema = new Schema({
 		required: 'Please add a comuna',
 		trim: true
 	},
-	ciudad: {
+	city: {
 		type: Schema.ObjectId,
 		default: null,
-		required: 'Please add a ciudad',
+		required: 'Please add a city',
 		trim: true
 	},
-	pais: {
+	country: {
 		type: Schema.ObjectId,
 		default: null,
-		required: 'Please add a pais',
+		required: 'Please add a country',
 		trim: true
 	},
 	iscafeteria: {

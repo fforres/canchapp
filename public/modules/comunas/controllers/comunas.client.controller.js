@@ -10,8 +10,8 @@ angular.module('comunas').controller('ComunasController', ['$scope', '$statePara
 			// Create new Comuna object
 			var comuna = new Comunas ({
 				name: this.name,
-				pais: this.country,
-				ciudad: this.city
+				country: this.country,
+				city: this.city
 			});
 			// Redirect after save 
 			comuna.$save(function(response) {

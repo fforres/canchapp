@@ -20,6 +20,12 @@ var ComunaSchema = new Schema({
 		type: Date,
 		default: Date.now
 	},
+	city: {
+		type: Schema.ObjectId,
+		default: null,
+		required: 'Please select a city',
+		trim: true
+	},
 	user: {
 		type: Schema.ObjectId,
 		ref: 'User'

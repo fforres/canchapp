@@ -1,8 +1,8 @@
 'use strict';
 
 module.exports = {
-	//db: 'mongodb://localhost/canchapp-dev',
-	db: 'mongodb://canchapp:canchapp@ds031571.mongolab.com:31571/canchapp-dev',
+	db: 'mongodb://localhost/canchapp-dev',
+	//db: 'mongodb://canchapp:canchapp@ds031571.mongolab.com:31571/canchapp-dev',
 	app: {
 		title: 'CanchApp - Development Environment'
 	},
