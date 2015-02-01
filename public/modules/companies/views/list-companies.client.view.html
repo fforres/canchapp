@@ -3,17 +3,33 @@
         <h1>Companies</h1>
     </div>
     <div class="list-group">
-        <a data-ng-repeat="company in companies" data-ng-href="#!/companies/{{company._id}}" class="list-group-item">
-			<small class="list-group-item-text">
-				Posted on
-				<span data-ng-bind="company.created | date:'medium'"></span>
-				by
-				<span data-ng-bind="company.user.displayName"></span>
-			</small>
-			<h4 class="list-group-item-heading" data-ng-bind="company.name"></h4>
-        </a>
+
+        <div data-ng-repeat="company in companies" class="list-group-item">
+
+            <div class="pull-right">
+                <div class="btn-group-vertical" role="group">
+                    <a data-ng-href="#!/companies/{{company._id}}" class="btn btn-success"> <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span> Ver </a>
+                    <a data-ng-href="#!/companies/{{company._id}}/edit" class="btn btn-success"><span class="glyphicon glyphicon-list" aria-hidden="true"></span> Editar </a>
+                    <a data-ng-href="#!/companies/{{company._id}}/fields" class="btn btn-success"><span class="glyphicon glyphicon-list" aria-hidden="true"></span> Canchas  </a> <a data-ng-href="#!/companies/{{company._id}}/schedules" class="btn btn-success"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span> Horarios  </a>
+
+                </div>
+            </div>
+            <div>
+                <h4 class="list-group-item-heading" data-ng-bind="company.name"></h4>
+                <small class="list-group-item-text">
+                <br/>
+                Posted on
+                <span data-ng-bind="company.created | date:'medium'"></span>
+                <br/>
+                by
+                <span data-ng-bind="company.user.displayName"></span>
+                <br/>
+                <br/>
+            </small>
+            </div>
+        </div>
     </div>
     <div class="alert alert-warning text-center" data-ng-hide="!companies.$resolved || companies.length">
-    	No Companies yet, why don't you <a href="/#!/companies/create">create one</a>?
+        No Companies yet, why don't you <a href="/#!/companies/create">create one</a>?
     </div>
 </section>

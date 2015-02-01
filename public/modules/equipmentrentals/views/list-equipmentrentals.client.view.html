@@ -1,0 +1,19 @@
+<section data-ng-controller="EquipmentrentalsController" data-ng-init="find()">
+    <div class="page-header">
+        <h1>Equipmentrentals</h1>
+    </div>
+    <div class="list-group">
+        <a data-ng-repeat="equipmentrental in equipmentrentals" data-ng-href="#!/equipmentrentals/{{equipmentrental._id}}" class="list-group-item">
+			<small class="list-group-item-text">
+				Posted on
+				<span data-ng-bind="equipmentrental.created | date:'medium'"></span>
+				by
+				<span data-ng-bind="equipmentrental.user.displayName"></span>
+			</small>
+			<h4 class="list-group-item-heading" data-ng-bind="equipmentrental.name"></h4>
+        </a>
+    </div>
+    <div class="alert alert-warning text-center" data-ng-hide="!equipmentrentals.$resolved || equipmentrentals.length">
+    	No Equipmentrentals yet, why don't you <a href="/#!/equipmentrentals/create">create one</a>?
+    </div>
+</section>

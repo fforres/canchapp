@@ -6,7 +6,7 @@ module.exports = {
         description: ' mongodb, express,angular, node.js, sports, fields',
         keywords: ' mongodb, express,angular, node.js, sports, fields'
     },
-    port: process.env.PORT || 3000,
+    port: process.env.PORT || 3001,
     templateEngine: 'swig',
     sessionSecret: 'MEAN',
     sessionCollection: 'sessions',
@@ -22,7 +22,8 @@ module.exports = {
                 'public/lib/angular-resource/angular-resource.js',
                 'public/lib/angular-ui-router/release/angular-ui-router.js',
                 'public/lib/angular-ui-utils/ui-utils.js',
-                'public/lib/angular-bootstrap/ui-bootstrap-tpls.js'
+                'public/lib/angular-bootstrap/ui-bootstrap-tpls.js',
+                'public/lib/lodash/lodash.min.js'
             ]
         },
         css: [

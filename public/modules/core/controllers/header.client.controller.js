@@ -4,7 +4,12 @@ angular.module('core').controller('HeaderController', ['$scope', 'Authentication
 	function($scope, Authentication, Menus) {
 		$scope.authentication = Authentication;
 		$scope.isCollapsed = false;
-		$scope.menu = Menus.getMenu('topbar');
+		//$scope.menu = Menus.getMenu('topbar');
+		if(_.contains($scope.authentication.user.roles,'admin')){
+			$scope.menu = Menus.getMenu('admin');
+		}else{
+			$scope.menu = Menus.getMenu('topbar');
+		}
 
 		$scope.toggleCollapsibleMenu = function() {
 			$scope.isCollapsed = !$scope.isCollapsed;

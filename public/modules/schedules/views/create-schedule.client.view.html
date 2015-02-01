@@ -1,0 +1,61 @@
+<section data-ng-controller="SchedulesController">
+    <div class="page-header">
+        <h1>New Schedule</h1>
+    </div>
+    <div class="col-md-12">
+        <form class="form-horizontal" data-ng-submit="create()" novalidate>
+            <fieldset>
+                <div class="form-group">
+                    <div>
+                        <h2> Horario para la semana </h2>
+                        <div>
+                            <label class="control-label" for="pais">Hora Inicio</label>
+                            <div class="controls">
+                                <select class="form-control" data-ng-model="semana.horaInicio" data-ng-options="hourOption as hourOption.txt for hourOption in hoursOptions">
+                                </select>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="control-label" for="pais">Hora Fin</label>
+                            <div class="controls">
+                                <select class="form-control" data-ng-model="semana.horaFin" data-ng-options="hourOption as hourOption.txt for hourOption in hoursOptions">
+                                </select>
+                            </div>
+                        </div>
+
+                    </div>
+                    
+                    <div>
+                        <h2> Horario para el fin de semana </h2>
+
+                        <div>
+                            <label class="control-label" for="pais">Hora Inicio</label>
+                            <div class="controls">
+                                <select class="form-control" data-ng-model="finde.horaInicio" data-ng-options="hourOption as hourOption.txt for hourOption in hoursOptions">
+                                </select>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="control-label" for="pais">Hora Fin</label>
+                            <div class="controls">
+                                <select class="form-control" data-ng-model="finde.horaFin" data-ng-options="hourOption as hourOption.txt for hourOption in hoursOptions">
+                                </select>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                </div>
+                <div class="form-group">
+                    <input type="submit" class="btn btn-default">
+                </div>
+                <div data-ng-show="error" class="text-danger">
+                    <strong data-ng-bind="error"></strong>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</section>

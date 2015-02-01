@@ -1,3 +1,5 @@
+
+
 'use strict';
 
 //Setting up route
@@ -6,19 +8,19 @@ angular.module('fields').config(['$stateProvider',
 		// Fields state routing
 		$stateProvider.
 		state('listFields', {
-			url: '/fields',
+			url: '/companies/:companyId/fields',
 			templateUrl: 'modules/fields/views/list-fields.client.view.html'
 		}).
 		state('createField', {
-			url: '/fields/create',
+			url: '/companies/:companyId/fields/create',
 			templateUrl: 'modules/fields/views/create-field.client.view.html'
 		}).
 		state('viewField', {
-			url: '/fields/:fieldId',
+			url: '/companies/:companyId/fields/:fieldId',
 			templateUrl: 'modules/fields/views/view-field.client.view.html'
 		}).
 		state('editField', {
-			url: '/fields/:fieldId/edit',
+			url: '/companies/:companyId/fields/:fieldId/edit',
 			templateUrl: 'modules/fields/views/edit-field.client.view.html'
 		});
 	}

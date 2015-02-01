@@ -84,6 +84,22 @@ exports.list = function(req, res) {
 	});
 };
 
+
+/**
+ * List of Fields By Company
+ */
+exports.listByCompany = function(req, res) { 
+	Field.find({company:req.params.companyId}).sort('-created').populate('user', 'displayName').exec(function(err, fields) {
+		if (err) {
+			return res.status(400).send({
+				message: errorHandler.getErrorMessage(err)
+			});
+		} else {
+			res.jsonp(fields);
+		}
+	});
+};
+
 /**
  * Field middleware
  */

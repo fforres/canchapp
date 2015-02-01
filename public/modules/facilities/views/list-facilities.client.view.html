@@ -1,0 +1,19 @@
+<section data-ng-controller="FacilitiesController" data-ng-init="find()">
+    <div class="page-header">
+        <h1>Facilities</h1>
+    </div>
+    <div class="list-group">
+        <a data-ng-repeat="facility in facilities" data-ng-href="#!/facilities/{{facility._id}}" class="list-group-item">
+			<small class="list-group-item-text">
+				Posted on
+				<span data-ng-bind="facility.created | date:'medium'"></span>
+				by
+				<span data-ng-bind="facility.user.displayName"></span>
+			</small>
+			<h4 class="list-group-item-heading" data-ng-bind="facility.name"></h4>
+        </a>
+    </div>
+    <div class="alert alert-warning text-center" data-ng-hide="!facilities.$resolved || facilities.length">
+    	No Facilities yet, why don't you <a href="/#!/facilities/create">create one</a>?
+    </div>
+</section>

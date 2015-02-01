@@ -21,8 +21,8 @@ angular.module('companies').controller('CompaniesController', ['$scope', '$state
                 iscafeteria: this.iscafeteria,
                 isnecesariosersocio: this.isnecesariosersocio
             });
-            
             company.$save(function(response) {
+
                 // Redirect after save
                 $location.path('companies/' + response._id);
 
@@ -38,10 +38,11 @@ angular.module('companies').controller('CompaniesController', ['$scope', '$state
                 $scope.country = '';
                 $scope.iscafeteria = false;
                 $scope.isnecesariosersocio = false;
+
             }, function(errorResponse) {
                 $scope.error = errorResponse.data.message;
             });
-            
+
         };
         // Remove existing Company
         $scope.remove = function(company) {
@@ -60,7 +61,22 @@ angular.module('companies').controller('CompaniesController', ['$scope', '$state
         };
         // Update existing Company
         $scope.update = function() {
-            var company = $scope.company;
+            console.log($scope)
+
+            var company = new Companies({
+                _id: $scope.company._id,
+                name: $scope.company.name,
+                address: $scope.company.address,
+                email: $scope.company.email,
+                phone: $scope.company.phone,
+                geoloc_x: $scope.company.geoloc_x,
+                geoloc_y: $scope.company.geoloc_y,
+                comuna: $scope.company.comuna._id,
+                city: $scope.company.city._id,
+                country: $scope.company.country._id,
+                iscafeteria: $scope.company.iscafeteria,
+                isnecesariosersocio: $scope.company.isnecesariosersocio
+            });
             company.$update(function() {
                 $location.path('companies/' + company._id);
             }, function(errorResponse) {
@@ -69,7 +85,9 @@ angular.module('companies').controller('CompaniesController', ['$scope', '$state
         };
         // Find a list of Companies
         $scope.find = function() {
-            $scope.companies = Companies.query();
+            $scope.companies = Companies.query(function() {});
+            console.log($scope)
+
         };
         // Find a list of Cities by Country selected
         $scope.findCitiesByCountry = function(country) {
@@ -93,32 +111,60 @@ angular.module('companies').controller('CompaniesController', ['$scope', '$state
             $scope.codeAddress()
         };
         $scope.codeAddress = function() {
-            var address = $scope.country.name + ", " + $scope.city.name + ", " + $scope.comuna.name + ", " + $scope.address;
-            console.log(address)
-            $scope.geocoder.geocode({
-                'address': address
-            }, function(results, status) {
-                if (status == google.maps.GeocoderStatus.OK) {
-                    $scope.map.setCenter(results[0].geometry.location);
-                    $scope.marker = new google.maps.Marker({
-                        map: $scope.map,
-                        position: results[0].geometry.location,
-                        draggable: true,
-                        title: $scope.name
-                    });
+            if ($scope.company) {
+                var address = $scope.company.country.name + ", " + $scope.company.city.name + ", " + $scope.company.comuna.name + ", " + $scope.address;
+                $scope.geocoder.geocode({
+                    'address': address
+                }, function(results, status) {
+                    if (status == google.maps.GeocoderStatus.OK) {
+                        $scope.map.setCenter(results[0].geometry.location);
+                        $scope.marker = new google.maps.Marker({
+                            map: $scope.map,
+                            position: results[0].geometry.location,
+                            draggable: true,
+                            title: $scope.name
+                        });
 
-                    $scope.geoloc_x = $scope.marker.position.D;
-                    $scope.geoloc_y = $scope.marker.position.k;
-
-                    google.maps.event.addListener($scope.marker, 'dragend', function() {
-                        console.log(this)
                         $scope.geoloc_x = $scope.marker.position.D;
                         $scope.geoloc_y = $scope.marker.position.k;
-                    })
-                } else {
-                    alert('Geocode was not successful for the following reason: ' + status);
-                }
-            });
+
+                        google.maps.event.addListener($scope.marker, 'dragend', function() {
+                            console.log(this)
+                            $scope.geoloc_x = $scope.marker.position.D;
+                            $scope.geoloc_y = $scope.marker.position.k;
+                        })
+                    } else {
+                        alert('Geocode was not successful for the following reason: ' + status);
+                    }
+                });
+            } else {
+                var address = $scope.country.name + ", " + $scope.city.name + ", " + $scope.comuna.name + ", " + $scope.address;
+                $scope.geocoder.geocode({
+                    'address': address
+                }, function(results, status) {
+                    if (status == google.maps.GeocoderStatus.OK) {
+                        $scope.map.setCenter(results[0].geometry.location);
+                        $scope.marker = new google.maps.Marker({
+                            map: $scope.map,
+                            position: results[0].geometry.location,
+                            draggable: true,
+                            title: $scope.name
+                        });
+
+                        $scope.geoloc_x = $scope.marker.position.D;
+                        $scope.geoloc_y = $scope.marker.position.k;
+
+                        google.maps.event.addListener($scope.marker, 'dragend', function() {
+                            console.log(this)
+                            $scope.geoloc_x = $scope.marker.position.D;
+                            $scope.geoloc_y = $scope.marker.position.k;
+                        })
+                    } else {
+                        alert('Geocode was not successful for the following reason: ' + status);
+                    }
+                });
+            }
+
         };
         // Find existing Company
         $scope.findOne = function() {
