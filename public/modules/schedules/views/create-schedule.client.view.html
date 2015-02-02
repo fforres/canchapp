@@ -11,7 +11,7 @@
                         <div>
                             <label class="control-label" for="pais">Hora Inicio</label>
                             <div class="controls">
-                                <select class="form-control" data-ng-model="semana.horaInicio" data-ng-options="hourOption as hourOption.txt for hourOption in hoursOptions">
+                                <select class="form-control" data-ng-model="semana.startHour" data-ng-options="hourOption as hourOption.txt for hourOption in hoursOptions">
                                 </select>
                             </div>
                         </div>
@@ -19,20 +19,22 @@
                         <div>
                             <label class="control-label" for="pais">Hora Fin</label>
                             <div class="controls">
-                                <select class="form-control" data-ng-model="semana.horaFin" data-ng-options="hourOption as hourOption.txt for hourOption in hoursOptions">
+                                <select class="form-control" data-ng-model="semana.endingHour" data-ng-options="hourOption as hourOption.txt for hourOption in hoursOptions">
                                 </select>
                             </div>
                         </div>
+                        
+                        
 
                     </div>
-                    
+                    <br/>
                     <div>
                         <h2> Horario para el fin de semana </h2>
 
                         <div>
                             <label class="control-label" for="pais">Hora Inicio</label>
                             <div class="controls">
-                                <select class="form-control" data-ng-model="finde.horaInicio" data-ng-options="hourOption as hourOption.txt for hourOption in hoursOptions">
+                                <select class="form-control" data-ng-model="finde.startHour" data-ng-options="hourOption as hourOption.txt for hourOption in hoursOptions">
                                 </select>
                             </div>
                         </div>
@@ -40,17 +42,28 @@
                         <div>
                             <label class="control-label" for="pais">Hora Fin</label>
                             <div class="controls">
-                                <select class="form-control" data-ng-model="finde.horaFin" data-ng-options="hourOption as hourOption.txt for hourOption in hoursOptions">
+                                <select class="form-control" data-ng-model="finde.endingHour" data-ng-options="hourOption as hourOption.txt for hourOption in hoursOptions">
                                 </select>
                             </div>
                         </div>
 
+                        <!--div>
+                            <label class="control-label" for="pais">Precio</label>
+                            <div class="controls">
+                                <div class="input-group">
+                                    <input class="form-control" placeholder="Precio" type="text" data-ng-model="finde.valor" />
+                                    <span class="input-group-addon">
+                                        <span class="glyphicon glyphicon-usd"></span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div-->
                     </div>
 
 
                 </div>
                 <div class="form-group">
-                    <input type="submit" class="btn btn-default">
+                    <input type="submit" class="btn btn-default" value="Crear horario">
                 </div>
                 <div data-ng-show="error" class="text-danger">
                     <strong data-ng-bind="error"></strong>

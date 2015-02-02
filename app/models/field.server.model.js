@@ -34,13 +34,19 @@ var FieldSchema = new Schema({
         type: Schema.ObjectId,
         default: null,
         required: 'Please select a company',
-        ref:'company',
+        ref:'Company',
         trim: true
     },
     reservationTime: {
         type: Number,
         default: 0,
         required: 'Please select a minimum time for reservations (in days)',
+        trim: true
+    },
+    schedule:{
+        type: Schema.ObjectId,
+        default: null,
+        ref:'Schedule',
         trim: true
     },
     created: {
