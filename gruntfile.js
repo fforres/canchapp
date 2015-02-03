@@ -95,9 +95,9 @@ module.exports = function(grunt) {
 		'node-inspector': {
 			custom: {
 				options: {
-					'web-port': 1337,
+					'web-port': 1338,
 					'web-host': 'localhost',
-					'debug-port': 5858,
+					'debug-port': 5859,
 					'save-live-edit': true,
 					'no-preload': true,
 					'stack-trace-limit': 50,
@@ -158,7 +158,8 @@ module.exports = function(grunt) {
 	});
 
 	// Default task(s).
-	grunt.registerTask('default', ['lint', 'concurrent:default']);
+	//grunt.registerTask('default', ['lint', 'concurrent:default']);
+	grunt.registerTask('default', [ 'concurrent:default']);
 
 	// Debug task.
 	grunt.registerTask('debug', ['lint', 'concurrent:debug']);
