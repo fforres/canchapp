@@ -12,13 +12,10 @@ var mongoose = require('mongoose'),
 var ScheduleSchema = new Schema({
 	company: {
         type: Schema.ObjectId,
-        default: null,
-        required: 'Please select a company',
         ref:'Company',
-        trim: true
     },
     startHour: {
-		type: Number,
+		type: Number, 
         default: 0,
         required: 'Please add a starting Hour',
         trim: true
@@ -31,7 +28,7 @@ var ScheduleSchema = new Schema({
     },
     day: {
         type: Schema.ObjectId,
-        ref: 'Days'
+        ref: 'Day'
     },
 	created: {
 		type: Date,

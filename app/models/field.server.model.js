@@ -44,10 +44,11 @@ var FieldSchema = new Schema({
         trim: true
     },
     schedule:{
-        type: Schema.ObjectId,
-        default: null,
-        ref:'Schedule',
-        trim: true
+        type: [{
+            type: Schema.ObjectId,
+            ref: 'Schedule'
+        }],
+        required : 'Please select a Media'
     },
     created: {
         type: Date,

@@ -13,8 +13,8 @@ module.exports = function(app) {
 
 	app.route('/companies/:companyId')
 		.get(companies.read)
-		.put(users.requiresLogin, companies.hasAuthorization, companies.update)
-		.delete(users.requiresLogin, companies.hasAuthorization, companies.delete);
+		.put(users.requiresLogin, users.requiresAdmin, companies.update)
+		.delete(users.requiresLogin, users.requiresAdmin, companies.delete);
 
 	app.route('/companies/:companyId/fields')
 		.get(fields.list)

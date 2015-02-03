@@ -61,8 +61,6 @@ angular.module('companies').controller('CompaniesController', ['$scope', '$state
         };
         // Update existing Company
         $scope.update = function() {
-            console.log($scope)
-
             var company = new Companies({
                 _id: $scope.company._id,
                 name: $scope.company.name,
@@ -77,6 +75,8 @@ angular.module('companies').controller('CompaniesController', ['$scope', '$state
                 iscafeteria: $scope.company.iscafeteria,
                 isnecesariosersocio: $scope.company.isnecesariosersocio
             });
+            console.log($scope)
+            console.log(company)
             company.$update(function() {
                 $location.path('companies/' + company._id);
             }, function(errorResponse) {
@@ -102,11 +102,15 @@ angular.module('companies').controller('CompaniesController', ['$scope', '$state
         };
         $scope.findMapLocation = function() {
             $scope.showmap = true;
+            console.log($scope)
             $scope.geocoder = new google.maps.Geocoder();
+
+
             var mapOptions = {
                 zoom: 15,
                 center: new google.maps.LatLng(0, 0)
-            };
+            }
+
             $scope.map = new google.maps.Map(document.getElementById('mapCanvas'), mapOptions);
             $scope.codeAddress()
         };
@@ -116,26 +120,31 @@ angular.module('companies').controller('CompaniesController', ['$scope', '$state
                 $scope.geocoder.geocode({
                     'address': address
                 }, function(results, status) {
-                    if (status == google.maps.GeocoderStatus.OK) {
-                        $scope.map.setCenter(results[0].geometry.location);
-                        $scope.marker = new google.maps.Marker({
-                            map: $scope.map,
-                            position: results[0].geometry.location,
-                            draggable: true,
-                            title: $scope.name
-                        });
-
-                        $scope.geoloc_x = $scope.marker.position.D;
-                        $scope.geoloc_y = $scope.marker.position.k;
-
-                        google.maps.event.addListener($scope.marker, 'dragend', function() {
-                            console.log(this)
-                            $scope.geoloc_x = $scope.marker.position.D;
-                            $scope.geoloc_y = $scope.marker.position.k;
-                        })
+                    var centroDelMapa = new google.maps.LatLng(0, 0)
+                    if ($scope.company && $scope.company.geoloc_x != 0 && $scope.company.geoloc_y != 0) {
+                        centroDelMapa = new google.maps.LatLng($scope.company.geoloc_y, $scope.company.geoloc_x);
+                    } else if (status == google.maps.GeocoderStatus.OK) {
+                        centroDelMapa = results[0].geometry.location
                     } else {
                         alert('Geocode was not successful for the following reason: ' + status);
+                        return;
                     }
+                    $scope.map.setCenter(centroDelMapa);
+                    $scope.marker = new google.maps.Marker({
+                        map: $scope.map,
+                        position: centroDelMapa,
+                        draggable: true,
+                        title: $scope.name
+                    });
+
+                    $scope.company.geoloc_x = $scope.marker.position.D;
+                    $scope.company.geoloc_y = $scope.marker.position.k;
+
+                    google.maps.event.addListener($scope.marker, 'dragend', function() {
+                        console.log(this)
+                        $scope.company.geoloc_x = this.position.D;
+                        $scope.company.geoloc_y = this.position.k;
+                    })
                 });
             } else {
                 var address = $scope.country.name + ", " + $scope.city.name + ", " + $scope.comuna.name + ", " + $scope.address;
@@ -156,8 +165,8 @@ angular.module('companies').controller('CompaniesController', ['$scope', '$state
 
                         google.maps.event.addListener($scope.marker, 'dragend', function() {
                             console.log(this)
-                            $scope.geoloc_x = $scope.marker.position.D;
-                            $scope.geoloc_y = $scope.marker.position.k;
+                            $scope.geoloc_x = this.position.D;
+                            $scope.geoloc_y = this.position.k;
                         })
                     } else {
                         alert('Geocode was not successful for the following reason: ' + status);
@@ -170,6 +179,8 @@ angular.module('companies').controller('CompaniesController', ['$scope', '$state
         $scope.findOne = function() {
             $scope.company = Companies.get({
                 companyId: $stateParams.companyId
+            }, function(e) {
+                console.log(e)
             });
         };
     }
