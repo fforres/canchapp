@@ -1,18 +1,19 @@
 'use strict';
 
 // Fields controller
-angular.module('fields').controller('FieldsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Fields', 'Fieldcompositions', 'Fieldtypes', 'Fieldschedules','Days',
-    function($scope, $stateParams, $location, Authentication, Fields, Fieldcompositions, Fieldtypes, Fieldschedules,  Days) {
+angular.module('fields').controller('FieldsController', ['$scope', '$stateParams', '$location', 'Authentication', 'FieldsByCompany', 'Fields', 'Fieldcompositions', 'Fieldtypes', 'Fieldschedules', 'Days',
+    function($scope, $stateParams, $location, Authentication, FieldsByCompany, Fields, Fieldcompositions, Fieldtypes, Fieldschedules, Days) {
         $scope.authentication = Authentication;
         $scope.companyId = $stateParams.companyId;
         $scope.fieldCompositions = Fieldcompositions.query();
         $scope.fieldTypes = Fieldtypes.query();
         $scope.days = Days.query();
-        console.log($scope)
 
         // Create new Field
         $scope.create = function() {
+            console.log($scope)
             console.log($scope.days)
+            console.log("///////////////////////////")
 
             // Create new Field object
             var field = new Fields({
@@ -22,19 +23,60 @@ angular.module('fields').controller('FieldsController', ['$scope', '$stateParams
                 company: $scope.companyId,
                 reservationTime: this.reservationTime
             });
+            field.$save(function(response) {
+                var responseField = response;
+                var fieldschedules = [];
+                var fieldId = response._id;
+                _.each($scope.days, function(day, v) {
+                    console.log(day)
+                    if (day.open) {
+                        _.each(day.schedules, function(daySchedule, v2) {
+                            fieldschedules.push(new Fieldschedules({
+                                field: fieldId,
+                                startHour: daySchedule.beggining.getMinutes() + daySchedule.beggining.getHours() * 60,
+                                endHour: daySchedule.end.getMinutes() + daySchedule.end.getHours() * 60,
+                                value: daySchedule.value,
+                                open: true,
+                                day: day._id
+                            }))
+                        })
+                    } else {
+                        fieldschedules.push(new Fieldschedules({
+                            field: fieldId,
+                            startHour: 0,
+                            endHour: 0,
+                            value: 0,
+                            open: false,
+                            day: day._id
+                        }))
+                    }
+                })
 
-            // Redirect after save
-            console.log(field)
-                /*
-                field.$save(function(response) {
-                    $location.path('fields/' + response._id);
+                var arrFieldShedulesId = []
+                _.each(fieldschedules, function(fieldschedule, v) {
+                    fieldschedule.$save(function(response) {
+                        arrFieldShedulesId.push(response._id)
+                        if (arrFieldShedulesId.length > 6) {
+                            console.log(responseField)
+                            console.log(arrFieldShedulesId)
+                                //delete responseField["_id"];
+                            responseField.schedules = arrFieldShedulesId;
+                            responseField.$update(function() {
+                                console.log('responseField')
+                            }, function(errorResponse) {
+                                $scope.error = errorResponse.data.message;
+                            });
+                        }
+                    }, function(errorResponse) {
+                        $scope.error = errorResponse.data.message;
+                    });
+                })
 
-                    // Clear form fields
-                    $scope.name = '';
-                }, function(errorResponse) {
-                    $scope.error = errorResponse.data.message;
-                });
-                */
+
+
+            }, function(errorResponse) {
+                $scope.error = errorResponse.data.message;
+            });
         };
 
         // Remove existing Field
@@ -70,8 +112,7 @@ angular.module('fields').controller('FieldsController', ['$scope', '$stateParams
             $scope.fields = Fields.get({
                 companyId: $scope.companyId
             }, function(e) {
-                console.log(e)
-                console.log($scope)
+                //
             });
         };
 

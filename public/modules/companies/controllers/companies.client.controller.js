@@ -1,8 +1,8 @@
 'use strict';
 
 // Companies controller
-angular.module('companies').controller('CompaniesController', ['$scope', '$stateParams', '$location', 'Authentication', 'Companies', 'Countries', 'CountriesCities', 'CitiesComunas',
-    function($scope, $stateParams, $location, Authentication, Companies, Countries, CountriesCities, CitiesComunas) {
+angular.module('companies').controller('CompaniesController', ['$scope', '$stateParams', '$location', 'Authentication', 'Companies',  'FieldsByCompany', 'Countries', 'CountriesCities', 'CitiesComunas',
+    function($scope, $stateParams, $location, Authentication, Companies, FieldsByCompany, Countries, CountriesCities, CitiesComunas) {
         $scope.authentication = Authentication;
         $scope.countries = Countries.query();
         // Create new Company
@@ -85,9 +85,7 @@ angular.module('companies').controller('CompaniesController', ['$scope', '$state
         };
         // Find a list of Companies
         $scope.find = function() {
-            $scope.companies = Companies.query(function() {});
-            console.log($scope)
-
+            $scope.companies = FieldsByCompany.query(function() {});
         };
         // Find a list of Cities by Country selected
         $scope.findCitiesByCountry = function(country) {
@@ -177,7 +175,7 @@ angular.module('companies').controller('CompaniesController', ['$scope', '$state
         };
         // Find existing Company
         $scope.findOne = function() {
-            $scope.company = Companies.get({
+            $scope.company = FieldsByCompany.get({
                 companyId: $stateParams.companyId
             }, function(e) {
                 console.log(e)

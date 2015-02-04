@@ -43,12 +43,11 @@ var FieldSchema = new Schema({
         required: 'Please select a minimum time for reservations (in days)',
         trim: true
     },
-    schedule:{
+    schedules:{
         type: [{
             type: Schema.ObjectId,
-            ref: 'Schedule'
+            ref: 'Fieldschedule'
         }],
-        required : 'Please select a Media'
     },
     created: {
         type: Date,
